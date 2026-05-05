@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Sello Evento Sostenible AOCA 360</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;overflow-x:hidden}
+body{
+  background:#F4F8F4;
+  color:#1A2A1A;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.6;
+}
+
+/* ── LAYOUT WRAPPER ── */
+.page{max-width:780px;margin:0 auto;padding:0 16px 60px}
+
+/* ── HEADER (no sticky, simple) ── */
+.header{
+  margin:0 -16px 0;
+  width:calc(100% + 32px);
+}
+.header-logo-bar{
+  background:#ffffff;
+  border-bottom:1px solid #E0EAD8;
+  padding:16px 20px;
+}
+.header-logo-inner{
+  max-width:780px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo-img{height:72px;width:auto;display:block}
+.header-tag{
+  font-size:11px;font-weight:700;
+  color:#2E7D32;
+  background:#E8F5E8;
+  border:1px solid #C8E6C8;
+  padding:4px 10px;border-radius:20px;
+  letter-spacing:0.06em;
+}
+.header-sub-bar{
+  background:#0A3D0A;
+  padding:8px 20px;
+}
+.header-sub-inner{
+  max-width:780px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.header-sub{font-size:12px;color:rgba(255,255,255,0.65);letter-spacing:0.04em;font-weight:500}
+.sact-badge{
+  font-size:10px;font-weight:700;
+  color:#C8A84B;
+  background:rgba(200,168,75,0.15);
+  border:1px solid rgba(200,168,75,0.35);
+  padding:4px 10px;border-radius:20px;
+  letter-spacing:0.06em;white-space:nowrap;
+}
+.header-brand{display:none}
+.header-divider{display:none}
+.header-inner{display:none}
+.header-top{display:none}
+.header-bottom{display:none}
+
+/* ── SCORE BAR ── */
+.score-bar{
+  background:#fff;
+  border-bottom:2px solid #D0E8D0;
+  padding:12px 20px;
+  margin:0 -16px 28px;
+  width:calc(100% + 32px);
+}
+.score-bar-inner{
+  max-width:780px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.score-num{font-size:34px;font-weight:900;color:#0A3D0A;line-height:1;transition:all .3s;font-variant-numeric:tabular-nums}
+.score-denom{font-size:13px;color:#7A9A7A;font-weight:500}
+.score-pct{font-size:13px;font-weight:700;background:#E8F5E8;color:#2E7D32;padding:3px 10px;border-radius:20px;transition:all .3s}
+.nivel-pill{
+  display:flex;align-items:center;gap:7px;
+  padding:7px 16px;border-radius:30px;
+  font-size:13px;font-weight:700;
+  border:2px solid;transition:all .35s;
+}
+.n-none{background:#f5f5f5;color:#aaa;border-color:#ddd}
+.n-ini{background:#E8F5E9;color:#2E7D32;border-color:#81C784}
+.n-comp{background:#E3F2FD;color:#1565C0;border-color:#64B5F6}
+.n-lid{background:#FFF8E1;color:#E65100;border-color:#FFB300}
+.pilares-bar{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap}
+.pb-item{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:48px}
+.pb-track{width:40px;height:5px;background:#E0E0E0;border-radius:3px;overflow:hidden}
+.pb-fill{height:100%;background:#43A047;border-radius:3px;transition:width .4s ease;width:0%}
+.pb-label{font-size:10px;color:#7A9A7A;font-weight:700;letter-spacing:0.05em}
+.pb-pct{font-size:11px;font-weight:800;color:#2E7D32;transition:all .3s}
+
+/* ── INTRO ── */
+.intro{
+  background:#0A3D0A;border-radius:16px;
+  padding:26px 28px;margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.intro::before{
+  content:"360°";
+  position:absolute;right:-8px;top:-16px;
+  font-size:110px;font-weight:900;
+  color:rgba(255,255,255,0.04);
+  line-height:1;pointer-events:none;
+}
+.intro-ey{font-size:11px;font-weight:700;color:#66BB6A;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+.intro-t{font-size:24px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:9px}
+.intro-t em{font-style:normal;color:#66BB6A}
+.intro-p{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:14px}
+.intro-tags{display:flex;flex-wrap:wrap;gap:6px}
+.itag{font-size:10px;font-weight:600;padding:3px 9px;border-radius:11px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12)}
+
+/* ── NIVELES REF ── */
+.niveles-ref{background:#fff;border-radius:14px;border:1.5px solid #D8EAD8;padding:18px 20px;margin-bottom:24px}
+.sect-lbl{font-size:11px;font-weight:800;color:#5A7A5A;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sect-lbl::before{content:"";width:16px;height:2px;background:#43A047;border-radius:2px}
+.nref{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #EAF2EA}
+.nref:last-child{border-bottom:none;padding-bottom:0}
+.nref-ico{font-size:20px;flex-shrink:0;margin-top:1px}
+.nref-t{font-size:13px;font-weight:700;color:#1A2A1A;margin-bottom:2px}
+.nref-d{font-size:12px;color:#7A9A7A;line-height:1.5}
+
+/* ── DATOS ── */
+.datos-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:11px;font-weight:800;color:#5A7A5A;letter-spacing:.07em;text-transform:uppercase}
+.field input{
+  background:#fff;border:1.5px solid #D0E4D0;
+  border-radius:10px;padding:10px 13px;
+  font-size:14px;color:#1A2A1A;
+  font-family:inherit;outline:none;transition:border-color .2s,box-shadow .2s;
+  width:100%;
+}
+.field input:focus{border-color:#43A047;box-shadow:0 0 0 3px rgba(67,160,71,.12)}
+.field input::placeholder{color:#bbb}
+.field input[type=date]{cursor:pointer;-webkit-appearance:none;appearance:none}
+
+/* ── PILAR ── */
+.pilar-block{background:#fff;border-radius:14px;border:1.5px solid #D8EAD8;margin-bottom:20px;overflow:hidden}
+.pilar-hdr{
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.pilar-hdr-l{display:flex;align-items:center;gap:10px}
+.pilar-badge{font-size:11px;font-weight:800;color:#fff;padding:3px 8px;border-radius:6px;letter-spacing:.06em}
+.pilar-name{font-size:15px;font-weight:800;color:#fff}
+.pilar-score{font-size:13px;font-weight:700;color:rgba(255,255,255,.85);margin-right:4px}
+.pilar-chev{font-size:11px;color:rgba(255,255,255,.55);transition:transform .28s}
+.pilar-block.open .pilar-chev{transform:rotate(180deg)}
+.pilar-body{display:none;border-top:1px solid #E8F2E8}
+.pilar-block.open .pilar-body{display:block}
+
+/* ── CRITERIO ── */
+.crit{
+  padding:14px 20px;border-bottom:1px solid #F0F8F0;
+  display:grid;grid-template-columns:1fr auto;gap:12px;
+  transition:background .18s;
+}
+.crit:last-child{border-bottom:none}
+.crit:hover{background:#FAFDF8}
+.crit.impl{background:#F0FAF0;border-left:3px solid #43A047}
+.crit.proc{background:#FEFCE8;border-left:3px solid #FFB300}
+.crit-id{font-size:10px;font-weight:800;color:#7A9A7A;letter-spacing:.1em;margin-bottom:3px}
+.crit-txt{font-size:14px;color:#1A2A1A;line-height:1.5;margin-bottom:5px}
+.crit-meta{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.fase-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:7px;background:#E8F5E8;color:#2E7D32;border:1px solid #C8E6C8}
+.ev-hint{font-size:11px;color:#9AB09A;font-style:italic}
+
+/* Botón evidencia */
+.ev-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:700;
+  color:#1565C0;background:#E8F0FD;
+  border:1.5px solid #BBDEFB;border-radius:8px;
+  padding:5px 11px;cursor:pointer;transition:all .18s;
+  -webkit-tap-highlight-color:transparent;
+}
+.ev-btn:hover{background:#BBDEFB;border-color:#1565C0}
+.ev-btn.cargada{color:#2E7D32;background:#E8F5E8;border-color:#A5D6A7}
+.ev-wrap{display:none;margin-top:7px;gap:6px;align-items:center}
+.ev-wrap.vis{display:flex;flex-wrap:wrap;gap:6px}
+.ev-input{
+  flex:1;min-width:180px;
+  background:#fff;border:1.5px solid #D0E4D0;
+  border-radius:8px;padding:7px 10px;
+  font-size:12px;color:#1A2A1A;font-family:inherit;outline:none;
+  transition:border-color .2s;
+}
+.ev-input:focus{border-color:#1565C0}
+.ev-input::placeholder{color:#bbb}
+.ev-save{background:#1B6B1B;color:#fff;border:none;border-radius:7px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;transition:background .18s;-webkit-tap-highlight-color:transparent}
+.ev-save:hover{background:#0A3D0A}
+.ev-drive{background:#1565C0;color:#fff;border:none;border-radius:7px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;transition:background .18s}
+.ev-status{font-size:11px;color:#2E7D32;font-weight:700;display:none}
+.ev-status.vis{display:inline}
+
+/* Botones criterio */
+.opciones{display:flex;gap:5px;flex-shrink:0}
+.crit-ctrl{display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex-shrink:0}
+.op-btn{
+  width:40px;height:40px;border-radius:10px;
+  border:2px solid #D8EAD8;
+  background:#FAFDF8;color:#7A9A7A;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:800;transition:all .16s;
+  -webkit-tap-highlight-color:transparent;
+}
+.op-btn:hover{transform:scale(1.08)}
+.op-btn:active{transform:scale(.94)}
+.op-btn.sel-si{background:#E8F5E8;color:#2E7D32;border-color:#66BB6A;box-shadow:0 0 0 3px rgba(67,160,71,.15)}
+.op-btn.sel-med{background:#FFF8E1;color:#E65100;border-color:#FFB300;box-shadow:0 0 0 3px rgba(255,179,0,.18)}
+.op-btn.sel-no{background:#FFEBEE;color:#C62828;border-color:#EF9A9A;box-shadow:0 0 0 3px rgba(198,40,40,.1)}
+.pts-tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:8px;background:#EEF5EE;color:#7A9A7A;text-align:center;min-width:50px;transition:all .25s}
+.pts-1{background:#E8F5E8;color:#2E7D32}
+.pts-05{background:#FFF8E1;color:#E65100}
+.pts-0{background:#FFEBEE;color:#C62828}
+
+/* ── PILARES GRID ── */
+.pil-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.pil-card{background:#fff;border-radius:12px;border:1.5px solid #D8EAD8;padding:14px 16px}
+.pil-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.pil-card-name{font-size:12px;font-weight:700;color:#1A2A1A;line-height:1.3}
+.pil-card-pct{font-size:20px;font-weight:900;color:#1B6B1B;line-height:1}
+.prog-bg{height:6px;background:#E0EAE0;border-radius:3px;overflow:hidden;margin-bottom:4px}
+.prog-bar{height:100%;border-radius:3px;transition:width .5s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,#2E7D32,#66BB6A)}
+.prog-bar.warn{background:linear-gradient(90deg,#FFB300,#FFD54F)}
+.prog-bar.low{background:linear-gradient(90deg,#EF9A9A,#E57373)}
+.pil-card-sub{font-size:11px;color:#7A9A7A}
+
+/* ── TABLA PUNTUACIÓN ── */
+.punt-tbl{background:#fff;border-radius:14px;border:1.5px solid #D8EAD8;overflow:hidden;margin-bottom:24px}
+.punt-hdr{background:#0A3D0A;padding:12px 20px}
+.punt-hdr-t{font-size:12px;font-weight:800;color:#fff;letter-spacing:.08em;text-transform:uppercase}
+.punt-row{display:grid;grid-template-columns:1fr 70px 70px 70px 85px;border-bottom:1px solid #EAF2EA}
+.punt-row:last-child{border-bottom:none}
+.punt-col{padding:11px 14px;font-size:13px;display:flex;align-items:center}
+.punt-col:not(:first-child){justify-content:center;border-left:1px solid #EAF2EA}
+.punt-col-hdr{font-size:11px;font-weight:800;color:#7A9A7A;letter-spacing:.06em;text-transform:uppercase}
+.punt-row.total{background:#EAF5EA;border-top:2px solid #C8E6C8}
+.punt-row.total .punt-col{font-weight:800;color:#0A3D0A}
+.punt-big{font-size:16px;font-weight:900;color:#1B6B1B}
+
+/* ── NIVEL RESULTADO ── */
+.nivel-res{
+  background:#fff;border-radius:14px;border:2px solid #D8EAD8;
+  padding:22px 24px;margin-bottom:24px;text-align:center;
+  transition:border-color .4s,background .4s;
+}
+.nivel-res.ini{border-color:#81C784;background:#F0FBF0}
+.nivel-res.comp{border-color:#64B5F6;background:#F0F7FF}
+.nivel-res.lid{border-color:#FFB300;background:#FFFBF0}
+.r-ico{font-size:46px;display:block;margin-bottom:7px}
+.r-t{font-size:20px;font-weight:900;margin-bottom:5px;color:#1A2A1A}
+.r-d{font-size:13px;color:#7A9A7A;line-height:1.6;max-width:480px;margin:0 auto}
+
+/* ── DECLARACIÓN ── */
+.decl-card{background:#fff;border-radius:14px;border:1.5px solid #D8EAD8;padding:22px 24px;margin-bottom:24px}
+.decl-txt{font-size:13px;color:#7A9A7A;line-height:1.7;margin-bottom:18px;font-style:italic}
+.firma-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ── ACCIONES ── */
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-p{
+  background:#1B6B1B;color:#fff;border:none;
+  border-radius:10px;padding:13px 28px;
+  font-size:14px;font-weight:800;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;box-shadow:0 4px 12px rgba(27,107,27,.3);
+  font-family:inherit;-webkit-tap-highlight-color:transparent;
+}
+.btn-p:hover{background:#0A3D0A;transform:translateY(-1px);box-shadow:0 6px 18px rgba(27,107,27,.4)}
+.btn-s{
+  background:#fff;color:#1B6B1B;border:2px solid #2E7D32;
+  border-radius:10px;padding:11px 22px;
+  font-size:14px;font-weight:800;cursor:pointer;
+  transition:all .2s;font-family:inherit;-webkit-tap-highlight-color:transparent;
+}
+.btn-s:hover{background:#E8F5E8}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .header-sub{display:none}
+  .pilares-bar{display:none}
+  .datos-grid,.firma-grid,.pil-grid{grid-template-columns:1fr}
+  .punt-row{grid-template-columns:1fr 55px 55px 75px}
+  .punt-col:nth-child(3){display:none}
+  .intro{padding:18px 16px}
+  .intro-t{font-size:20px}
+  .opciones .op-btn{width:36px;height:36px;font-size:13px}
+  .page{padding:0 12px 50px}
+  .header{margin:0 -12px;width:calc(100% + 24px)}
+  .score-bar{margin:0 -12px 22px;width:calc(100% + 24px);padding:10px 16px}
+}
+
+@media print{
+  .header{position:static}
+  .score-bar{position:static}
+  .pilar-body{display:block!important}
+  .pilar-chev{display:none}
+  .ev-wrap,.ev-btn,.actions,.btn-p,.btn-s{display:none!important}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo-bar">
+    <div class="header-logo-inner">
+      <img class="logo-img" src="logo_aoca.png" alt="AOCA">
+      <span class="header-tag">Programa AOCA 360</span>
+    </div>
+  </div>
+  <div class="header-sub-bar">
+    <div class="header-sub-inner">
+      <span class="header-sub">Sello Evento Sostenible · Sistema de Gestión Sostenible MICE</span>
+      <span class="sact-badge">SACT · IRAM-SECTUR</span>
+    </div>
+  </div>
+</header>
+
+<!-- SCORE BAR -->
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div style="display:flex;align-items:baseline;gap:6px">
+      <span class="score-num" id="scoreNum">0.0</span>
+      <span class="score-denom">/ 31 pts</span>
+    </div>
+    <span class="score-pct" id="scorePct">0%</span>
+    <div class="nivel-pill n-none" id="nivelPill">
+      <span id="nIco">—</span><span id="nTxt">Sin nivel</span>
+    </div>
+    <div class="pilares-bar" id="pilaresBar"></div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-ey">Etapa 2 · Documento 1 de 3</div>
+  <h1 class="intro-t">Sello Evento Sostenible<br><em>AOCA 360</em></h1>
+  <p class="intro-p">Completá los 31 criterios para obtener el Sello de Edición de tu evento. El sistema calcula automáticamente tu nivel (Iniciación / Compromiso / Liderazgo) en tiempo real.</p>
+  <div class="intro-tags">
+    <span class="itag">SACT · Normas IRAM-SECTUR</span>
+    <span class="itag">GSTC MICE Standards 2024</span>
+    <span class="itag">ISO 20121:2024</span>
+    <span class="itag">ICCA Business Events</span>
+    <span class="itag">GRI Standards</span>
+  </div>
+</div>
+
+<!-- NIVELES -->
+<div class="niveles-ref">
+  <div class="sect-lbl">Niveles del Sello</div>
+  <div class="nref"><span class="nref-ico">🌱</span><div><div class="nref-t">Iniciación — ≥ 40% (≥ 12.4 pts)</div><div class="nref-d">Sin mínimo por pilar. Auto-evaluación completa + reporte de desempeño con evidencias.</div></div></div>
+  <div class="nref"><span class="nref-ico">🌿</span><div><div class="nref-t">Compromiso — ≥ 65% (≥ 20.2 pts) + mín. 50% por pilar</div><div class="nref-d">Requiere al menos el 50% del puntaje en cada uno de los cuatro pilares.</div></div></div>
+  <div class="nref"><span class="nref-ico">🏆</span><div><div class="nref-t">Liderazgo — ≥ 85% (≥ 26.4 pts) + mín. 75% por pilar</div><div class="nref-d">Máximo nivel. Candidatura a Distinción Nacional. Reporte completo + huella de carbono.</div></div></div>
+</div>
+
+<!-- DATOS -->
+<div class="sect-lbl" style="margin-bottom:14px">Datos del Evento</div>
+<div class="datos-grid">
+  <div class="field"><label>Nombre del evento</label><input type="text" id="d_nombre" placeholder="Ej: Congreso Nacional de Cardiología"></div>
+  <div class="field"><label>Edición</label><input type="text" id="d_edicion" placeholder="Ej: XXXII Edición"></div>
+  <div class="field"><label>Destino / Ciudad</label><input type="text" id="d_destino" placeholder="Ej: Buenos Aires, Argentina"></div>
+  <div class="field"><label>Organizador / OPC / OPE</label><input type="text" id="d_org" placeholder="Nombre de la organización"></div>
+  <div class="field"><label>Responsable de sostenibilidad</label><input type="text" id="d_resp" placeholder="Nombre y apellido"></div>
+  <div class="field"><label>Fecha de realización</label><input type="date" id="d_fecha"></div>
+</div>
+
+<!-- PILARES (JS) -->
+<div id="pilaresContainer"></div>
+
+<!-- PROGRESO POR PILAR -->
+<div class="sect-lbl" style="margin:4px 0 14px">Progreso por Pilar</div>
+<div class="pil-grid" id="pilGrid"></div>
+
+<!-- TABLA -->
+<div class="punt-tbl">
+  <div class="punt-hdr"><div class="punt-hdr-t">Tabla de Puntuación</div></div>
+  <div class="punt-row">
+    <div class="punt-col punt-col-hdr">Pilar</div>
+    <div class="punt-col punt-col-hdr">Total</div>
+    <div class="punt-col punt-col-hdr">✓ (1pt)</div>
+    <div class="punt-col punt-col-hdr">◑ (0.5)</div>
+    <div class="punt-col punt-col-hdr">Subtotal</div>
+  </div>
+  <div id="puntRows"></div>
+</div>
+
+<!-- NIVEL RESULTADO -->
+<div class="nivel-res" id="nivelRes">
+  <span class="r-ico" id="rIco">—</span>
+  <div class="r-t" id="rT">Completá el formulario</div>
+  <div class="r-d" id="rD">Marcá al menos un criterio para ver tu nivel en tiempo real.</div>
+</div>
+
+<!-- DECLARACIÓN -->
+<div class="decl-card">
+  <div class="sect-lbl">Declaración del Organizador</div>
+  <p class="decl-txt">Declaro que la información consignada en este Protocolo es veraz y que las evidencias indicadas se encuentran disponibles para verificación. Me comprometo a presentar el Reporte de Desempeño AOCA 360 dentro de los 30 días posteriores a la finalización del evento.</p>
+  <div class="firma-grid">
+    <div class="field"><label>Nombre y apellido</label><input type="text" id="f_nom" placeholder="Nombre completo"></div>
+    <div class="field"><label>Cargo</label><input type="text" id="f_cargo" placeholder="Cargo en la organización"></div>
+    <div class="field"><label>Organización</label><input type="text" id="f_org2" placeholder="Nombre de la organización"></div>
+    <div class="field"><label>Fecha de firma</label><input type="date" id="f_fecha"></div>
+  </div>
+</div>
+
+<!-- ACCIONES -->
+<div class="actions">
+  <button class="btn-p" onclick="enviarFormulario()">📤 Enviar a AOCA</button>
+  <button class="btn-s" onclick="window.print()">🖨 Guardar PDF</button>
+  <button class="btn-s" onclick="limpiar()">↺ Limpiar formulario</button>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const DRIVE_FOLDER = 'https://drive.google.com/drive/u/3/folders/1ITL20szzhK2cZ2xvBPqEywX5mU3Uowzq'; // Reemplazar con URL de Google Drive cuando esté definida
+
+const PILARES = [
+  { id:'GS', n:'Gestión Sostenible', color:'#00695C', tot:9, crit:[
+    {id:'GS-01',t:'Se designó un/a responsable de sostenibilidad para el evento.',f:'Planificar',e:'Comunicación interna o acta de designación.'},
+    {id:'GS-02',t:'Se elaboró una política de sostenibilidad específica para esta edición del evento.',f:'Planificar',e:'Documento de política firmado.'},
+    {id:'GS-03',t:'Los criterios de sostenibilidad se incorporaron en la selección de venue y proveedores.',f:'Planificar',e:'Briefings, cotizaciones, contratos.'},
+    {id:'GS-04',t:'El equipo del evento recibió una inducción sobre las prácticas sostenibles implementadas.',f:'Planificar/Ejecutar',e:'Registro de asistencia o confirmación de recepción.'},
+    {id:'GS-05',t:'Se comunicaron las medidas sostenibles del evento a los asistentes.',f:'Ejecutar',e:'Capturas, materiales, registros fotográficos.'},
+    {id:'GS-06',t:'Se elaboró un reporte de desempeño sostenible post-evento.',f:'Actuar',e:'Reporte completado y presentado a AOCA.'},
+    {id:'GS-07',t:'Se definió un plan de mejora para la próxima edición del evento.',f:'Actuar',e:'Sección de mejoras en el reporte de desempeño.'},
+    {id:'GS-08',t:'Los patrocinadores y expositores fueron informados sobre la política de sostenibilidad del evento.',f:'Planificar',e:'Contratos, emails, briefings de sponsorship.'},
+    {id:'GS-09',t:'Se implementó un mecanismo para medir la satisfacción de los asistentes y clientes del evento.',f:'Planificar/Actuar',e:'Encuesta de satisfacción.'},
+  ]},
+  { id:'SE', n:'Impactos Socioeconómicos', color:'#1565C0', tot:7, crit:[
+    {id:'SE-01',t:'Se priorizó la contratación de proveedores locales del destino donde se realiza el evento.',f:'Planificar',e:'Lista de proveedores con origen geográfico.'},
+    {id:'SE-02',t:'El personal eventual del evento fue contratado bajo condiciones de trabajo formales o formalizables.',f:'Planificar/Ejecutar',e:'Contratos, recibos de sueldo, registros de AFIP.'},
+    {id:'SE-03',t:'El catering incluyó productos de temporada y/o de producción local o regional.',f:'Planificar',e:'Menú del evento con origen de ingredientes.'},
+    {id:'SE-04',t:'Se gestionaron los excedentes alimentarios del evento de manera responsable.',f:'Planificar/Ejecutar',e:'Acuerdo con organización receptora, registro fotográfico.'},
+    {id:'SE-05',t:'Se evaluó el impacto económico del evento en la comunidad receptora.',f:'Actuar',e:'Estimación incluida en el reporte de desempeño.'},
+    {id:'SE-06',t:'El evento contempló al menos una acción de vinculación con la comunidad local.',f:'Ejecutar',e:'Registro fotográfico, comunicación de la actividad.'},
+    {id:'SE-07',t:'Los contratos con proveedores incluyen cláusulas o compromisos de conducta responsable.',f:'Planificar',e:'Contratos con cláusula adjunta.'},
+  ]},
+  { id:'CI', n:'Impactos Socio-Culturales', color:'#6A1B9A', tot:7, crit:[
+    {id:'CI-01',t:'El venue y las instalaciones del evento cuentan con accesibilidad universal.',f:'Planificar',e:'Checklist de accesibilidad del venue completado.'},
+    {id:'CI-02',t:'Los paneles, conferencias y mesas de debate contemplan paridad de género en la participación.',f:'Planificar',e:'Listado de oradores con género declarado.'},
+    {id:'CI-03',t:'La asignación de roles y funciones en el evento no responde a criterios de género.',f:'Planificar',e:'Organigrama del evento con criterios de asignación.'},
+    {id:'CI-04',t:'El evento garantiza condiciones de participación igualitaria para el colectivo LGTBIQ+.',f:'Planificar/Ejecutar',e:'Código de conducta del evento.'},
+    {id:'CI-05',t:'El evento incorpora elementos de la identidad y cultura local del destino.',f:'Planificar',e:'Programa del evento, registros fotográficos.'},
+    {id:'CI-06',t:'El evento cuenta con un Código de Conducta accesible para todos los participantes.',f:'Planificar/Ejecutar',e:'Código de conducta publicado.'},
+    {id:'CI-07',t:'Se implementaron medidas de comunicación accesible para personas con discapacidades sensoriales.',f:'Planificar/Ejecutar',e:'Registros de las medidas implementadas. Plan de mejoras.'},
+  ]},
+  { id:'AM', n:'Impactos Ambientales y Gestión Eficiente de Recursos', color:'#E65100', tot:8, crit:[
+    {id:'AM-01',t:'Se elaboró un plan de gestión de residuos previo al evento.',f:'Planificar',e:'Plan de gestión de residuos documentado.'},
+    {id:'AM-02',t:'Se eliminaron o redujeron al mínimo los plásticos de un solo uso en el evento.',f:'Planificar/Ejecutar',e:'Registro de materiales utilizados, fotografías.'},
+    {id:'AM-03',t:'Se promovió el uso de transporte sostenible para el acceso al evento.',f:'Planificar/Ejecutar',e:'Comunicaciones enviadas a asistentes.'},
+    {id:'AM-04',t:'Se consultó al venue sobre su política de gestión energética y/o uso de energías renovables.',f:'Planificar',e:'Consulta documentada, respuesta del venue.'},
+    {id:'AM-05',t:'Se gestionó responsablemente el consumo de agua durante el evento.',f:'Planificar/Ejecutar',e:'Registro de medidas implementadas.'},
+    {id:'AM-06',t:'Los materiales de producción del evento priorizan alternativas sostenibles.',f:'Planificar',e:'Lista de materiales con descripción de origen.'},
+    {id:'AM-07',t:'Se estimó la huella de carbono del evento.',f:'Actuar',e:'Estimación de huella incluida en el reporte de desempeño.'},
+    {id:'AM-08',t:'Se implementaron acciones de compensación o reducción de emisiones.',f:'Actuar',e:'Registro de acción de compensación o plan documentado.'},
+  ]},
+];
+
+const estado = {};
+const evidencias = {};
+PILARES.forEach(p => p.crit.forEach(c => { estado[c.id] = null; }));
+
+// ── RENDER PILARES ──────────────────────────────────────────────────────────
+function renderPilares() {
+  const cont = document.getElementById('pilaresContainer');
+  PILARES.forEach((p, pi) => {
+    const div = document.createElement('div');
+    div.className = 'pilar-block open';
+    div.id = 'pb-' + p.id;
+    div.innerHTML = `
+      <div class="pilar-hdr" style="background:${p.color}" onclick="toggleP('${p.id}')">
+        <div class="pilar-hdr-l">
+          <span class="pilar-badge">P${pi+1}</span>
+          <span class="pilar-name">${p.n}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="pilar-score" id="ps-${p.id}">0 / ${p.tot}</span>
+          <span class="pilar-chev">▼</span>
+        </div>
+      </div>
+      <div class="pilar-body">
+        ${p.crit.map(c => `
+          <div class="crit" id="c-${c.id}">
+            <div>
+              <div class="crit-id">${c.id}</div>
+              <div class="crit-txt">${c.t}</div>
+              <div class="crit-meta">
+                <span class="fase-tag">${c.f}</span>
+                <span class="ev-hint">${c.e}</span>
+              </div>
+              <button class="ev-btn" id="evb-${c.id}" onclick="toggleEv('${c.id}')">📎 Adjuntar evidencia</button>
+              <span class="ev-status" id="evs-${c.id}"> ✓ Vinculada</span>
+              <div class="ev-wrap" id="evw-${c.id}">
+                <input class="ev-input" type="url" id="evl-${c.id}" placeholder="Pegá el link de Google Drive...">
+                <button class="ev-save" onclick="saveEv('${c.id}')">Guardar</button>
+                <button class="ev-drive" onclick="openDrive()">📂 Drive</button>
+              </div>
+            </div>
+            <div class="crit-ctrl">
+              <div class="opciones">
+                <button class="op-btn" id="bs-${c.id}" onclick="set('${c.id}','si')" title="Implementado — 1 pt">✓</button>
+                <button class="op-btn" id="bm-${c.id}" onclick="set('${c.id}','med')" title="En proceso — 0.5 pts">◑</button>
+                <button class="op-btn" id="bn-${c.id}" onclick="set('${c.id}','no')" title="No aplicado — 0 pts">✗</button>
+              </div>
+              <span class="pts-tag" id="pt-${c.id}">— pts</span>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    cont.appendChild(div);
+  });
+}
+
+function toggleP(id) {
+  document.getElementById('pb-' + id).classList.toggle('open');
+}
+
+// ── EVIDENCIAS ──────────────────────────────────────────────────────────────
+function openDrive() {
+  if (DRIVE_FOLDER === '#') {
+    alert('La carpeta de Google Drive se configurará próximamente. Podés pegar el link del archivo directamente en el campo.');
+    return;
+  }
+  window.open(DRIVE_FOLDER, '_blank');
+}
+
+function toggleEv(id) {
+  const w = document.getElementById('evw-' + id);
+  w.classList.toggle('vis');
+  if (w.classList.contains('vis')) document.getElementById('evl-' + id).focus();
+}
+
+function saveEv(id) {
+  const link = document.getElementById('evl-' + id).value.trim();
+  if (!link) { document.getElementById('evw-' + id).classList.remove('vis'); return; }
+  evidencias[id] = link;
+  document.getElementById('evw-' + id).classList.remove('vis');
+  const btn = document.getElementById('evb-' + id);
+  btn.textContent = '📎 Evidencia cargada'; btn.classList.add('cargada');
+  document.getElementById('evs-' + id).classList.add('vis');
+}
+
+// ── LÓGICA CRITERIOS ────────────────────────────────────────────────────────
+function set(id, val) {
+  if (estado[id] === val) val = null;
+  estado[id] = val;
+  ['si','med','no'].forEach(v => {
+    document.getElementById('b' + v[0] + '-' + id).className = 'op-btn';
+  });
+  const cr = document.getElementById('c-' + id);
+  const pt = document.getElementById('pt-' + id);
+  cr.classList.remove('impl','proc');
+  if (val === 'si') {
+    document.getElementById('bs-' + id).classList.add('sel-si');
+    pt.textContent = '1 pt'; pt.className = 'pts-tag pts-1'; cr.classList.add('impl');
+  } else if (val === 'med') {
+    document.getElementById('bm-' + id).classList.add('sel-med');
+    pt.textContent = '0.5 pts'; pt.className = 'pts-tag pts-05'; cr.classList.add('proc');
+  } else if (val === 'no') {
+    document.getElementById('bn-' + id).classList.add('sel-no');
+    pt.textContent = '0 pts'; pt.className = 'pts-tag pts-0';
+  } else {
+    pt.textContent = '— pts'; pt.className = 'pts-tag';
+  }
+  recalc();
+}
+
+function pts(v) { return v==='si'?1:v==='med'?0.5:0; }
+
+function recalc() {
+  let total = 0;
+  const pd = {};
+  PILARES.forEach(p => {
+    let pp=0, si=0, med=0;
+    p.crit.forEach(c => { const v=estado[c.id]; pp+=pts(v); if(v==='si')si++; else if(v==='med')med++; });
+    pd[p.id] = { pts:pp, si, med, tot:p.tot, pct:(pp/p.tot)*100 };
+    total += pp;
+    document.getElementById('ps-' + p.id).textContent = pp.toFixed(1) + ' / ' + p.tot;
+  });
+
+  const pct = (total/31)*100;
+  document.getElementById('scoreNum').textContent = total.toFixed(1);
+  document.getElementById('scorePct').textContent = pct.toFixed(0) + '%';
+
+  const nivel = calcNivel(total, pct, pd);
+  updateBadge(nivel);
+  updateResult(nivel, total, pct, pd);
+  updateMini(pd);
+  updateTable(pd, total);
+  updateCards(pd);
+}
+
+function calcNivel(t, pct, pd) {
+  const minP = Math.min(...Object.values(pd).map(p => p.pct));
+  if (t === 0) return 'none';
+  if (pct >= 85 && minP >= 75) return 'lid';
+  if (pct >= 65 && Object.values(pd).every(p => p.pct >= 50)) return 'comp';
+  if (pct >= 40) return 'ini';
+  return 'bajo';
+}
+
+function updateBadge(n) {
+  const pill = document.getElementById('nivelPill');
+  const map = {
+    none:  ['n-none','—','Sin nivel'],
+    bajo:  ['n-none','⬇','Bajo umbral'],
+    ini:   ['n-ini','🌱','Iniciación'],
+    comp:  ['n-comp','🌿','Compromiso'],
+    lid:   ['n-lid','🏆','Liderazgo'],
+  };
+  const [cls,ico,txt] = map[n];
+  pill.className = 'nivel-pill ' + cls;
+  document.getElementById('nIco').textContent = ico;
+  document.getElementById('nTxt').textContent = txt;
+}
+
+function updateResult(n, t, pct, pd) {
+  const el = document.getElementById('nivelRes');
+  const ico = document.getElementById('rIco');
+  const tit = document.getElementById('rT');
+  const dsc = document.getElementById('rD');
+  el.className = 'nivel-res';
+  const mins = Object.values(pd).map(p => p.pct.toFixed(0) + '%').join(' / ');
+  if (n==='none') { ico.textContent='—'; tit.textContent='Completá el formulario'; dsc.textContent='Marcá al menos un criterio para ver tu nivel.'; }
+  else if (n==='lid') { el.classList.add('lid'); ico.textContent='🏆'; tit.textContent='LIDERAZGO'; dsc.textContent=`Puntaje: ${t.toFixed(1)} / 31 pts (${pct.toFixed(0)}%) · Pilares: ${mins}. Candidato a la Distinción Nacional de Gestión Sostenible MICE.`; }
+  else if (n==='comp') { el.classList.add('comp'); ico.textContent='🌿'; tit.textContent='COMPROMISO'; dsc.textContent=`Puntaje: ${t.toFixed(1)} / 31 pts (${pct.toFixed(0)}%) · Pilares: ${mins}. Nivel de gestión sostenible activa verificada.`; }
+  else if (n==='ini') { el.classList.add('ini'); ico.textContent='🌱'; tit.textContent='INICIACIÓN'; dsc.textContent=`Puntaje: ${t.toFixed(1)} / 31 pts (${pct.toFixed(0)}%). Primer nivel alcanzado. Ingreso al Registro AOCA 360.`; }
+  else { ico.textContent='⬇'; tit.textContent='Por debajo del umbral'; dsc.textContent=`Puntaje: ${t.toFixed(1)} / 31 pts (${pct.toFixed(0)}%). Faltan ${(12.4-t).toFixed(1)} pts para nivel Iniciación.`; }
+}
+
+function updateMini(pd) {
+  const c = document.getElementById('pilaresBar');
+  if (!c.children.length) {
+    PILARES.forEach((p,i) => {
+      c.innerHTML += `<div class="pb-item"><div class="pb-track"><div class="pb-fill" id="pbf-${p.id}" style="width:0%"></div></div><div class="pb-label">P${i+1}</div><div class="pb-pct" id="pbp-${p.id}">0%</div></div>`;
+    });
+  }
+  PILARES.forEach(p => {
+    const d = pd[p.id];
+    document.getElementById('pbf-' + p.id).style.width = d.pct.toFixed(0) + '%';
+    document.getElementById('pbf-' + p.id).style.background = p.color;
+    document.getElementById('pbp-' + p.id).textContent = d.pct.toFixed(0) + '%';
+  });
+}
+
+function updateTable(pd, total) {
+  const c = document.getElementById('puntRows');
+  c.innerHTML = '';
+  PILARES.forEach(p => {
+    const d = pd[p.id];
+    c.innerHTML += `<div class="punt-row">
+      <div class="punt-col">${p.n}</div>
+      <div class="punt-col" style="color:#7A9A7A">${p.tot}</div>
+      <div class="punt-col"><span class="punt-big">${d.si}</span></div>
+      <div class="punt-col"><span class="punt-big">${d.med}</span></div>
+      <div class="punt-col"><span class="punt-big">${d.pts.toFixed(1)}</span></div>
+    </div>`;
+  });
+  c.innerHTML += `<div class="punt-row total">
+    <div class="punt-col">TOTAL</div>
+    <div class="punt-col">31</div>
+    <div class="punt-col"></div>
+    <div class="punt-col"></div>
+    <div class="punt-col"><span class="punt-big">${total.toFixed(1)}</span></div>
+  </div>`;
+}
+
+function updateCards(pd) {
+  const c = document.getElementById('pilGrid');
+  if (!c.children.length) {
+    PILARES.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'pil-card'; div.id = 'pc-' + p.id;
+      div.innerHTML = `<div class="pil-card-top"><div class="pil-card-name">${p.n}</div><div class="pil-card-pct" id="pcp-${p.id}">0%</div></div><div class="prog-bg"><div class="prog-bar" id="pcb-${p.id}" style="width:0%"></div></div><div class="pil-card-sub" id="pcs-${p.id}">0 / ${p.tot} pts</div>`;
+      c.appendChild(div);
+    });
+  }
+  PILARES.forEach(p => {
+    const d = pd[p.id];
+    const bar = document.getElementById('pcb-' + p.id);
+    document.getElementById('pcp-' + p.id).textContent = d.pct.toFixed(0) + '%';
+    bar.style.width = d.pct.toFixed(0) + '%';
+    bar.className = 'prog-bar';
+    bar.style.background = 'linear-gradient(90deg,' + p.color + ',' + p.color + 'AA)';
+    document.getElementById('pcs-' + p.id).textContent = d.pts.toFixed(1) + ' / ' + p.tot + ' pts';
+  });
+}
+
+function enviarFormulario() {
+  const nombre = document.getElementById('d_nombre').value || '(sin nombre)';
+  const edicion = document.getElementById('d_edicion').value || '';
+  const destino = document.getElementById('d_destino').value || '';
+  const org = document.getElementById('d_org').value || '';
+  const resp = document.getElementById('d_resp').value || '';
+  const fecha = document.getElementById('d_fecha').value || '';
+  const firmaNom = document.getElementById('f_nom').value || '';
+  const firmaCargo = document.getElementById('f_cargo').value || '';
+
+  // Calcular puntaje actual
+  let total = 0;
+  const pilarResumen = [];
+  PILARES.forEach(p => {
+    let pp = 0;
+    p.crit.forEach(c => { pp += pts(estado[c.id]); });
+    total += pp;
+    pilarResumen.push(p.n.split(' ')[0] + ': ' + pp.toFixed(1) + '/' + p.tot);
+  });
+  const pct = ((total/31)*100).toFixed(0);
+
+  // Determinar nivel
+  const pd = {};
+  PILARES.forEach(p => {
+    let pp=0;
+    p.crit.forEach(c => { pp += pts(estado[c.id]); });
+    pd[p.id] = { pts:pp, tot:p.tot, pct:(pp/p.tot)*100 };
+  });
+  const nivel = calcNivel(total, parseFloat(pct), pd);
+  const nivelNom = nivel==='lid'?'LIDERAZGO':nivel==='comp'?'COMPROMISO':nivel==='ini'?'INICIACIÓN':'Sin nivel';
+
+  // Armar detalle criterios
+  let detalleCrit = '';
+  PILARES.forEach(p => {
+    detalleCrit += '\n--- ' + p.n + ' ---\n';
+    p.crit.forEach(c => {
+      const v = estado[c.id];
+      const est = v==='si'?'✓ Implementado':v==='med'?'◑ En proceso':v==='no'?'✗ No aplicado':'— Sin marcar';
+      const ev = evidencias[c.id] ? ' | Evidencia: ' + evidencias[c.id] : '';
+      detalleCrit += c.id + ': ' + est + ev + '\n';
+    });
+  });
+
+  const asunto = encodeURIComponent('Protocolo AOCA 360 · ' + nombre + (edicion?' · '+edicion:''));
+  const cuerpo = encodeURIComponent(
+    'PROTOCOLO AOCA 360 — SELLO EVENTO SOSTENIBLE\n' +
+    '================================================\n\n' +
+    'DATOS DEL EVENTO\n' +
+    'Nombre: ' + nombre + '\n' +
+    'Edición: ' + edicion + '\n' +
+    'Destino: ' + destino + '\n' +
+    'Organizador: ' + org + '\n' +
+    'Responsable de sostenibilidad: ' + resp + '\n' +
+    'Fecha de realización: ' + fecha + '\n\n' +
+    'RESULTADO\n' +
+    'Puntaje total: ' + total.toFixed(1) + ' / 31 pts (' + pct + '%)\n' +
+    'Nivel: ' + nivelNom + '\n' +
+    'Pilares: ' + pilarResumen.join(' | ') + '\n\n' +
+    'DETALLE POR CRITERIO' + detalleCrit + '\n' +
+    'DECLARACIÓN\n' +
+    'Nombre: ' + firmaNom + '\n' +
+    'Cargo: ' + firmaCargo + '\n\n' +
+    '--- Enviado desde el Protocolo AOCA 360 ---'
+  );
+
+  window.location.href = 'mailto:direccioninstitucional@aoca.org.ar?subject=' + asunto + '&body=' + cuerpo;
+}
+
+function limpiar() {
+  if (!confirm('¿Limpiar todo el formulario?')) return;
+  Object.keys(estado).forEach(k => { estado[k] = null; });
+  Object.keys(evidencias).forEach(k => { delete evidencias[k]; });
+  PILARES.forEach(p => p.crit.forEach(c => {
+    ['si','med','no'].forEach(v => { document.getElementById('b'+v[0]+'-'+c.id).className = 'op-btn'; });
+    const pt = document.getElementById('pt-' + c.id);
+    pt.textContent = '— pts'; pt.className = 'pts-tag';
+    document.getElementById('c-' + c.id).classList.remove('impl','proc');
+    const evb = document.getElementById('evb-' + c.id);
+    if (evb) { evb.textContent='📎 Adjuntar evidencia'; evb.classList.remove('cargada'); }
+    const evs = document.getElementById('evs-' + c.id);
+    if (evs) evs.classList.remove('vis');
+    const evw = document.getElementById('evw-' + c.id);
+    if (evw) { evw.classList.remove('vis'); document.getElementById('evl-'+c.id).value=''; }
+  }));
+  recalc();
+}
+
+renderPilares();
+recalc();
+</script>
+</body>
+</html>
